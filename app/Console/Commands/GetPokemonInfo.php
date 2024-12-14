@@ -42,6 +42,18 @@ class GetPokemonInfo extends Command
 
         // 引数でポケモンのIDが指定されているかどうかで処理を分岐
         if (!empty($poke_id)) {
+            $p_id = Pokemons::where('p_id', $poke_id)->first();
+            if (! empty($p_id)) {
+                // 次の処理移動
+                return;
+            }
+            $result = $apiService->fetchData($poke_id);
+                $p_info = $this->getPokemonInfo($result);
+                print_r($p_info['id']);
+                print_r($p_info['jp_name']."\n");
+                print_r($p_info['en_name']."\n");
+                print_r("\n");
+                $p_info = $Pokemons->createPokemon($p_info);
         }else{
             $pokeid_min = 1;
             $pokeid_max = 898;
