@@ -14,3 +14,4 @@ use App\Http\Controllers\PokemonController;
 */
 
 Route::get('/', [PokemonController::class, 'index']);
+Route::get('/show/{id}', [PokemonController::class, 'show'])->name('poke_show');
